@@ -1,0 +1,711 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/1/2025 5:19:39 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LUFESO"
+  DTS:CreatorName="LUFESO\lufes"
+  DTS:DTSID="{4BDD8BCE-630B-4DC2-879B-4FAE6872141C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.2"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DimTiempo"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{6019C7A9-DCA7-44A5-8248-A0B8C0340056}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[csv manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{13EC09B7-6E03-4B7F-AA1D-8DD2543737E7}"
+      DTS:ObjectName="csv manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Users\lufes\OneDrive\Documents\GitHub\DWLGL\dimdates.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="tiempo_key"
+              DTS:DTSID="{6EB44E28-08B1-4D78-81E6-28A6B5FD288A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fecha"
+              DTS:DTSID="{35CF186D-8837-481C-95FD-09A7F36D7F39}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="nombre_dia"
+              DTS:DTSID="{06C9A69C-ED31-429D-AE98-62185BD9CAC3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="nombre_mes"
+              DTS:DTSID="{86F1A21D-AD22-4A1E-817B-EAC42A946CA8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="mes"
+              DTS:DTSID="{DE6B559A-516B-488E-9469-6AE0CC9DB03A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="dia"
+              DTS:DTSID="{5F0D797E-08BF-4B0E-9B09-6372DBFCF3F0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="anio"
+              DTS:DTSID="{F122926B-421B-412C-8946-424BE93FE60F}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LUFESO.DWLGL]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{8EAC62F4-135F-44CF-BC33-F499D5C8D5A1}"
+      DTS:ObjectName="LUFESO.DWLGL">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=LUFESO;Initial Catalog=DWLGL;Integrated Security=True;TrustServerCertificate=True;Application Name=SSIS-DimTiempo-{8EAC62F4-135F-44CF-BC33-F499D5C8D5A1}LUFESO.DWLGL;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{F6D2ACF7-A7C0-4DC2-BE99-10E9564ACCBA}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Cargar DimTiempo"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
+              name="Cargar DimTiempo"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The Destination database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."DimTiempo"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Cargar DimTiempo.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LUFESO.DWLGL]"
+                  connectionManagerRefId="Package.ConnectionManagers[LUFESO.DWLGL]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="ADO NET Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].Columns[fecha]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="fecha"
+                      externalMetadataColumnId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[fecha]"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[fecha]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].Columns[nombre_dia]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="nombre_dia"
+                      externalMetadataColumnId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[nombre_dia]"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[nombre_dia]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].Columns[nombre_mes]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="nombre_mes"
+                      externalMetadataColumnId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[nombre_mes]"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[nombre_mes]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].Columns[mes]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="mes"
+                      externalMetadataColumnId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[mes]"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[mes]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].Columns[dia]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="dia"
+                      externalMetadataColumnId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[dia]"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[dia]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].Columns[anio]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="anio"
+                      externalMetadataColumnId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[anio]"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[anio]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].Columns[tiempo_key]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="tiempo_key"
+                      externalMetadataColumnId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[tiempo_key]"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[tiempo_key]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[tiempo_key]"
+                      dataType="i4"
+                      name="tiempo_key" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[fecha]"
+                      dataType="dbTimeStamp"
+                      name="fecha" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[nombre_dia]"
+                      dataType="wstr"
+                      length="70"
+                      name="nombre_dia" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[nombre_mes]"
+                      dataType="wstr"
+                      length="70"
+                      name="nombre_mes" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[dia]"
+                      dataType="ui1"
+                      name="dia" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[mes]"
+                      dataType="ui1"
+                      name="mes" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[anio]"
+                      dataType="i2"
+                      name="anio" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Cargar DimTiempo.Outputs[ADO NET Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ADO NET Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Cargar DimTiempo.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Cargar DimTiempo.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Leer CSV fechas"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="Leer CSV fechas"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Leer CSV fechas.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[csv manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[csv manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[fecha]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].ExternalColumns[fecha]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[fecha]"
+                      name="fecha"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[nombre_dia]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].ExternalColumns[nombre_dia]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[nombre_dia]"
+                      name="nombre_dia"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[nombre_mes]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].ExternalColumns[nombre_mes]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[nombre_mes]"
+                      name="nombre_mes"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[mes]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].ExternalColumns[mes]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[mes]"
+                      name="mes"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[dia]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].ExternalColumns[dia]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[dia]"
+                      name="dia"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[anio]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].ExternalColumns[anio]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[anio]"
+                      name="anio"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[tiempo_key]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].ExternalColumns[tiempo_key]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[tiempo_key]"
+                      name="tiempo_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].ExternalColumns[fecha]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="fecha" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].ExternalColumns[nombre_dia]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="nombre_dia" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].ExternalColumns[nombre_mes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="nombre_mes" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].ExternalColumns[mes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="mes" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].ExternalColumns[dia]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="dia" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].ExternalColumns[anio]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="anio" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].ExternalColumns[tiempo_key]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="tiempo_key" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Flat File Source Output]"
+              endId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input]"
+              name="Flat File Source Output"
+              startId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Limpiar DimTiempo"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C1111E1C-5619-4885-AD1B-2C0AFEA59C75}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Limpiar DimTiempo"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{8EAC62F4-135F-44CF-BC33-F499D5C8D5A1}"
+          SQLTask:SqlStatementSource="DELETE DimTiempo" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{4E23DEA3-BC14-4090-8105-2E87B71486B3}"
+      DTS:From="Package\Limpiar DimTiempo"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Data Flow Task"
+          TopLeft="445.5,233.5" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Limpiar DimTiempo"
+          TopLeft="208.5,114.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="295.5,156.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="227.5,77"
+              Start="0,0"
+              End="227.5,69.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,34.5"
+                    Point2="0,38.5"
+                    Point3="4,38.5" />
+                  <mssgle:LineSegment
+                    End="223.5,38.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="223.5,38.5"
+                    Point2="227.5,38.5"
+                    Point3="227.5,42.5" />
+                  <mssgle:LineSegment
+                    End="227.5,69.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="162,42"
+          Id="Package\Data Flow Task\Leer CSV fechas"
+          TopLeft="345.5,193.5" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Data Flow Task\Cargar DimTiempo"
+          TopLeft="642,374" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Flat File Source Output]"
+          TopLeft="426.5,235.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="301.5,138.5"
+              Start="0,0"
+              End="301.5,131">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,65.25"
+                    Point2="0,69.25"
+                    Point3="4,69.25" />
+                  <mssgle:LineSegment
+                    End="297.5,69.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="297.5,69.25"
+                    Point2="301.5,69.25"
+                    Point3="301.5,73.25" />
+                  <mssgle:LineSegment
+                    End="301.5,131" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Cargar DimTiempo">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
