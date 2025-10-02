@@ -1,0 +1,1643 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/1/2025 11:07:14 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ARIEL"
+  DTS:CreatorName="ARIEL\ariel"
+  DTS:DTSID="{06C2CB4A-C832-4544-AAC2-F120664426FD}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.1"
+  DTS:LocaleID="17418"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{761F6DDE-5D9A-44F4-9894-577F2FB5C6B7}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.DWLGL]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{BCEC676E-2DF8-44DD-A6FB-075689AE41E0}"
+      DTS:ObjectName="localhost.DWLGL">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWLGL;Integrated Security=True;TrustServerCertificate=True;Application Name=SSIS-Package1-{BCEC676E-2DF8-44DD-A6FB-075689AE41E0}localhost.DWLGL;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.DWLGL1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{088EA7CC-D127-4D63-8AA0-526F28AC8804}"
+      DTS:ObjectName="localhost.DWLGL1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWLGL;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{088EA7CC-D127-4D63-8AA0-526F28AC8804}localhost.DWLGL1;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.transac]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{67E2126C-C896-425C-9442-9BB05E7B8E3B}"
+      DTS:ObjectName="localhost.transac">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=transac;Integrated Security=True;TrustServerCertificate=True;Application Name=SSIS-Package1-{67E2126C-C896-425C-9442-9BB05E7B8E3B}localhost.transac;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.transac1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7D944DDB-CCA6-4109-B6FA-7D30882412CC}"
+      DTS:ObjectName="localhost.transac1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=transac;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{7D944DDB-CCA6-4109-B6FA-7D30882412CC}localhost.transac1;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Limpiar FactVentas"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{566EC796-E9FD-48BE-8CFA-2D39407BEFE1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Limpiar FactVentas"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BCEC676E-2DF8-44DD-A6FB-075689AE41E0}"
+          SQLTask:SqlStatementSource="delete FactVentas" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Llenar FactVentas"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{3FE3BDF9-55E0-4233-9899-4CA678F0A96F}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Llenar FactVentas"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Llenar FactVentas\Búsqueda Cliente"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Búsqueda;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;6"
+              description="Combina columnas adicionales con el flujo de datos mediante la búsqueda de valores en una tabla. Por ejemplo, se combina la columna 'id. de empleado' con la tabla de empleados para obtener la 'fecha de contratación' y 'el nombre de empleado'. Se recomienda esta transformación cuando hay suficiente espacio en memoria para la tabla de búsqueda."
+              name="Búsqueda Cliente"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL que genera la tabla de búsqueda."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimCliente]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica una instrucción SQL que usa parámetros para generar la tabla de búsqueda."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimCliente]) [refTable]
+where [refTable].[cliente_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de conexión utilizado para tener acceso al conjunto de datos de referencia."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de caché de la tabla de búsqueda."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cómo la transformación de búsquedas trata las filas sin entradas coincidentes en el conjunto de datos de referencia."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el porcentaje de la caché asignado a las filas sin entradas coincidentes en el conjunto de datos de referencia."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Uso de memoria máximo para la caché de referencia en una plataforma de 32 bits."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Uso de memoria máximo para la caché de referencia en una plataforma de 64 bits."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indica si se debe hacer referencia a metadatos en formato XML."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="cliente_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="cliente_id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="nombre_cliente" dataType="DT_STR" length="191" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="created_at" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Especifica la lista de identificadores de linaje que están asignados a los parámetros que usa la instrucción SQL de la propiedad SQLCommand. Las entradas de la lista están separadas por puntos y comas."
+                  name="ParameterMap">#{Package\Llenar FactVentas\88:invalid};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determina si las claves duplicadas de los datos de referencia se deben tratar como errores cuando se usa el modo de caché."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Llenar FactVentas\Búsqueda Cliente.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.DWLGL1]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.DWLGL1]"
+                  description="Administrador de conexiones utilizado para obtener acceso a los datos de búsqueda."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Llenar FactVentas\Búsqueda Cliente.Inputs[Entrada de búsqueda]"
+                  name="Entrada de búsqueda">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Llenar FactVentas\Búsqueda Cliente.Inputs[Entrada de búsqueda].Columns[cliente_id]"
+                      cachedDataType="i4"
+                      cachedName="cliente_id"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[cliente_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Especifica la columna de la tabla de referencia con la que se combina una columna."
+                          name="JoinToReferenceColumn">cliente_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Especifica la columna de la tabla de referencia de la que se copia una columna."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Llenar FactVentas\Búsqueda Cliente.Outputs[Salida de entradas coincidentes de búsqueda]"
+                  errorOrTruncationOperation="Búsqueda"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Salida de entradas coincidentes de búsqueda"
+                  synchronousInputId="Package\Llenar FactVentas\Búsqueda Cliente.Inputs[Entrada de búsqueda]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Búsqueda Cliente.Outputs[Salida de entradas coincidentes de búsqueda].Columns[cliente_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copiar columna"
+                      lineageId="Package\Llenar FactVentas\Búsqueda Cliente.Outputs[Salida de entradas coincidentes de búsqueda].Columns[cliente_key]"
+                      name="cliente_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Especifica la columna de la tabla de referencia de la que se copia una columna."
+                          name="CopyFromReferenceColumn">cliente_key</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Llenar FactVentas\Búsqueda Cliente.Outputs[Salida de entradas no coincidentes de búsqueda]"
+                  description="Salida de búsqueda que trata las filas sin entradas coincidentes en el conjunto de datos de referencia. Utilice esta salida cuando la propiedad NoMatchBehavior esté establecida en 'Enviar las filas sin entradas coincidentes a la salida de entradas no coincidentes'."
+                  exclusionGroup="1"
+                  name="Salida de entradas no coincidentes de búsqueda"
+                  synchronousInputId="Package\Llenar FactVentas\Búsqueda Cliente.Inputs[Entrada de búsqueda]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Llenar FactVentas\Búsqueda Cliente.Outputs[Salida de error de búsqueda]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de búsqueda"
+                  synchronousInputId="Package\Llenar FactVentas\Búsqueda Cliente.Inputs[Entrada de búsqueda]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Búsqueda Cliente.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Búsqueda Cliente.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Búsqueda Cliente.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Búsqueda Cliente.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Llenar FactVentas\Búsqueda Producto"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Búsqueda;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;6"
+              description="Combina columnas adicionales con el flujo de datos mediante la búsqueda de valores en una tabla. Por ejemplo, se combina la columna 'id. de empleado' con la tabla de empleados para obtener la 'fecha de contratación' y 'el nombre de empleado'. Se recomienda esta transformación cuando hay suficiente espacio en memoria para la tabla de búsqueda."
+              name="Búsqueda Producto"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL que genera la tabla de búsqueda."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimProducto]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica una instrucción SQL que usa parámetros para generar la tabla de búsqueda."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimProducto]) [refTable]
+where [refTable].[producto_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de conexión utilizado para tener acceso al conjunto de datos de referencia."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de caché de la tabla de búsqueda."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cómo la transformación de búsquedas trata las filas sin entradas coincidentes en el conjunto de datos de referencia."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el porcentaje de la caché asignado a las filas sin entradas coincidentes en el conjunto de datos de referencia."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Uso de memoria máximo para la caché de referencia en una plataforma de 32 bits."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Uso de memoria máximo para la caché de referencia en una plataforma de 64 bits."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indica si se debe hacer referencia a metadatos en formato XML."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="producto_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="producto_id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="codigo" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="nombre" dataType="DT_STR" length="191" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="categoria" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="tipo" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="costo" dataType="DT_NUMERIC" length="0" precision="8" scale="2" codePage="0"/&gt;&lt;referenceColumn name="producto_activo" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Especifica la lista de identificadores de linaje que están asignados a los parámetros que usa la instrucción SQL de la propiedad SQLCommand. Las entradas de la lista están separadas por puntos y comas."
+                  name="ParameterMap">#{Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[producto_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determina si las claves duplicadas de los datos de referencia se deben tratar como errores cuando se usa el modo de caché."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Llenar FactVentas\Búsqueda Producto.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.DWLGL1]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.DWLGL1]"
+                  description="Administrador de conexiones utilizado para obtener acceso a los datos de búsqueda."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Llenar FactVentas\Búsqueda Producto.Inputs[Entrada de búsqueda]"
+                  name="Entrada de búsqueda">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Llenar FactVentas\Búsqueda Producto.Inputs[Entrada de búsqueda].Columns[producto_id]"
+                      cachedDataType="i4"
+                      cachedName="producto_id"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[producto_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Especifica la columna de la tabla de referencia con la que se combina una columna."
+                          name="JoinToReferenceColumn">producto_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Especifica la columna de la tabla de referencia de la que se copia una columna."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Llenar FactVentas\Búsqueda Producto.Outputs[Salida de entradas coincidentes de búsqueda]"
+                  errorOrTruncationOperation="Búsqueda"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Salida de entradas coincidentes de búsqueda"
+                  synchronousInputId="Package\Llenar FactVentas\Búsqueda Producto.Inputs[Entrada de búsqueda]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Búsqueda Producto.Outputs[Salida de entradas coincidentes de búsqueda].Columns[producto_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copiar columna"
+                      lineageId="Package\Llenar FactVentas\Búsqueda Producto.Outputs[Salida de entradas coincidentes de búsqueda].Columns[producto_key]"
+                      name="producto_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Especifica la columna de la tabla de referencia de la que se copia una columna."
+                          name="CopyFromReferenceColumn">producto_key</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Llenar FactVentas\Búsqueda Producto.Outputs[Salida de entradas no coincidentes de búsqueda]"
+                  description="Salida de búsqueda que trata las filas sin entradas coincidentes en el conjunto de datos de referencia. Utilice esta salida cuando la propiedad NoMatchBehavior esté establecida en 'Enviar las filas sin entradas coincidentes a la salida de entradas no coincidentes'."
+                  exclusionGroup="1"
+                  name="Salida de entradas no coincidentes de búsqueda"
+                  synchronousInputId="Package\Llenar FactVentas\Búsqueda Producto.Inputs[Entrada de búsqueda]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Llenar FactVentas\Búsqueda Producto.Outputs[Salida de error de búsqueda]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de búsqueda"
+                  synchronousInputId="Package\Llenar FactVentas\Búsqueda Producto.Inputs[Entrada de búsqueda]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Búsqueda Producto.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Búsqueda Producto.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Búsqueda Producto.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Búsqueda Producto.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Llenar FactVentas\Búsqueda Ubicaciones"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Búsqueda;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;6"
+              description="Combina columnas adicionales con el flujo de datos mediante la búsqueda de valores en una tabla. Por ejemplo, se combina la columna 'id. de empleado' con la tabla de empleados para obtener la 'fecha de contratación' y 'el nombre de empleado'. Se recomienda esta transformación cuando hay suficiente espacio en memoria para la tabla de búsqueda."
+              name="Búsqueda Ubicaciones"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL que genera la tabla de búsqueda."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimUbicacion]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica una instrucción SQL que usa parámetros para generar la tabla de búsqueda."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimUbicacion]) [refTable]
+where [refTable].[municipio_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de conexión utilizado para tener acceso al conjunto de datos de referencia."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de caché de la tabla de búsqueda."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cómo la transformación de búsquedas trata las filas sin entradas coincidentes en el conjunto de datos de referencia."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el porcentaje de la caché asignado a las filas sin entradas coincidentes en el conjunto de datos de referencia."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Uso de memoria máximo para la caché de referencia en una plataforma de 32 bits."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Uso de memoria máximo para la caché de referencia en una plataforma de 64 bits."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indica si se debe hacer referencia a metadatos en formato XML."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="ubicacion_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="municipio_id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="departamento_id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="codigo_iso_departamento" dataType="DT_STR" length="6" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="nombre_municipio" dataType="DT_STR" length="191" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="nombre_departamento" dataType="DT_STR" length="191" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="nombre_completo_ubicacion" dataType="DT_STR" length="400" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Especifica la lista de identificadores de linaje que están asignados a los parámetros que usa la instrucción SQL de la propiedad SQLCommand. Las entradas de la lista están separadas por puntos y comas."
+                  name="ParameterMap">#{Package\Llenar FactVentas\94:invalid};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determina si las claves duplicadas de los datos de referencia se deben tratar como errores cuando se usa el modo de caché."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.DWLGL1]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.DWLGL1]"
+                  description="Administrador de conexiones utilizado para obtener acceso a los datos de búsqueda."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Inputs[Entrada de búsqueda]"
+                  name="Entrada de búsqueda">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Inputs[Entrada de búsqueda].Columns[municipio_id]"
+                      cachedDataType="i4"
+                      cachedName="municipio_id"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[municipio_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Especifica la columna de la tabla de referencia con la que se combina una columna."
+                          name="JoinToReferenceColumn">municipio_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Especifica la columna de la tabla de referencia de la que se copia una columna."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Outputs[Salida de entradas coincidentes de búsqueda]"
+                  errorOrTruncationOperation="Búsqueda"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Salida de entradas coincidentes de búsqueda"
+                  synchronousInputId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Inputs[Entrada de búsqueda]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Outputs[Salida de entradas coincidentes de búsqueda].Columns[ubicacion_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copiar columna"
+                      lineageId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Outputs[Salida de entradas coincidentes de búsqueda].Columns[ubicacion_key]"
+                      name="ubicacion_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Especifica la columna de la tabla de referencia de la que se copia una columna."
+                          name="CopyFromReferenceColumn">ubicacion_key</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Outputs[Salida de entradas no coincidentes de búsqueda]"
+                  description="Salida de búsqueda que trata las filas sin entradas coincidentes en el conjunto de datos de referencia. Utilice esta salida cuando la propiedad NoMatchBehavior esté establecida en 'Enviar las filas sin entradas coincidentes a la salida de entradas no coincidentes'."
+                  exclusionGroup="1"
+                  name="Salida de entradas no coincidentes de búsqueda"
+                  synchronousInputId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Inputs[Entrada de búsqueda]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Outputs[Salida de error de búsqueda]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de búsqueda"
+                  synchronousInputId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Inputs[Entrada de búsqueda]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Llenar FactVentas\Búsqueda Vendedor"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Búsqueda;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;6"
+              description="Combina columnas adicionales con el flujo de datos mediante la búsqueda de valores en una tabla. Por ejemplo, se combina la columna 'id. de empleado' con la tabla de empleados para obtener la 'fecha de contratación' y 'el nombre de empleado'. Se recomienda esta transformación cuando hay suficiente espacio en memoria para la tabla de búsqueda."
+              name="Búsqueda Vendedor"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL que genera la tabla de búsqueda."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimVendedor]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica una instrucción SQL que usa parámetros para generar la tabla de búsqueda."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimVendedor]) [refTable]
+where [refTable].[vendedor_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de conexión utilizado para tener acceso al conjunto de datos de referencia."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de caché de la tabla de búsqueda."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cómo la transformación de búsquedas trata las filas sin entradas coincidentes en el conjunto de datos de referencia."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el porcentaje de la caché asignado a las filas sin entradas coincidentes en el conjunto de datos de referencia."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Uso de memoria máximo para la caché de referencia en una plataforma de 32 bits."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Uso de memoria máximo para la caché de referencia en una plataforma de 64 bits."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indica si se debe hacer referencia a metadatos en formato XML."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="vendedor_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="vendedor_id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="nombre_vendedor" dataType="DT_STR" length="191" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="apellido_vendedor" dataType="DT_STR" length="191" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="nombre_completo" dataType="DT_STR" length="400" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Especifica la lista de identificadores de linaje que están asignados a los parámetros que usa la instrucción SQL de la propiedad SQLCommand. Las entradas de la lista están separadas por puntos y comas."
+                  name="ParameterMap">#{Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[vendedor_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determina si las claves duplicadas de los datos de referencia se deben tratar como errores cuando se usa el modo de caché."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Llenar FactVentas\Búsqueda Vendedor.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.DWLGL1]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.DWLGL1]"
+                  description="Administrador de conexiones utilizado para obtener acceso a los datos de búsqueda."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Llenar FactVentas\Búsqueda Vendedor.Inputs[Entrada de búsqueda]"
+                  name="Entrada de búsqueda">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Llenar FactVentas\Búsqueda Vendedor.Inputs[Entrada de búsqueda].Columns[vendedor_id]"
+                      cachedDataType="i4"
+                      cachedName="vendedor_id"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[vendedor_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Especifica la columna de la tabla de referencia con la que se combina una columna."
+                          name="JoinToReferenceColumn">vendedor_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Especifica la columna de la tabla de referencia de la que se copia una columna."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Llenar FactVentas\Búsqueda Vendedor.Outputs[Salida de entradas coincidentes de búsqueda]"
+                  errorOrTruncationOperation="Búsqueda"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Salida de entradas coincidentes de búsqueda"
+                  synchronousInputId="Package\Llenar FactVentas\Búsqueda Vendedor.Inputs[Entrada de búsqueda]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Búsqueda Vendedor.Outputs[Salida de entradas coincidentes de búsqueda].Columns[vendedor_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copiar columna"
+                      lineageId="Package\Llenar FactVentas\Búsqueda Vendedor.Outputs[Salida de entradas coincidentes de búsqueda].Columns[vendedor_key]"
+                      name="vendedor_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Especifica la columna de la tabla de referencia de la que se copia una columna."
+                          name="CopyFromReferenceColumn">vendedor_key</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Llenar FactVentas\Búsqueda Vendedor.Outputs[Salida de entradas no coincidentes de búsqueda]"
+                  description="Salida de búsqueda que trata las filas sin entradas coincidentes en el conjunto de datos de referencia. Utilice esta salida cuando la propiedad NoMatchBehavior esté establecida en 'Enviar las filas sin entradas coincidentes a la salida de entradas no coincidentes'."
+                  exclusionGroup="1"
+                  name="Salida de entradas no coincidentes de búsqueda"
+                  synchronousInputId="Package\Llenar FactVentas\Búsqueda Vendedor.Inputs[Entrada de búsqueda]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Llenar FactVentas\Búsqueda Vendedor.Outputs[Salida de error de búsqueda]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de búsqueda"
+                  synchronousInputId="Package\Llenar FactVentas\Búsqueda Vendedor.Inputs[Entrada de búsqueda]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Búsqueda Vendedor.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Búsqueda Vendedor.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Búsqueda Vendedor.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Búsqueda Vendedor.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Llenar FactVentas\Factventas"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
+              name="Factventas"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."FactVentas"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Llenar FactVentas\Factventas.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.DWLGL]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.DWLGL]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].Columns[venta_id]"
+                      cachedDataType="i4"
+                      cachedName="venta_id"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[venta_id]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[venta_id]" />
+                    <inputColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].Columns[venta_total_con_impuestos]"
+                      cachedDataType="numeric"
+                      cachedName="venta_total_con_impuestos"
+                      cachedPrecision="12"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[venta_total_con_impuestos]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[venta_total_con_impuestos]" />
+                    <inputColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].Columns[suma]"
+                      cachedDataType="numeric"
+                      cachedName="suma"
+                      cachedPrecision="12"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[suma]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[suma]" />
+                    <inputColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].Columns[venta_total]"
+                      cachedDataType="numeric"
+                      cachedName="venta_total"
+                      cachedPrecision="12"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[venta_total]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[venta_total]" />
+                    <inputColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].Columns[fecha]"
+                      cachedDataType="dbDate"
+                      cachedName="fecha"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[fecha_key]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[fecha]" />
+                    <inputColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].Columns[municipio_id]"
+                      cachedDataType="i4"
+                      cachedName="municipio_id"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[ubicacion_key]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[municipio_id]" />
+                    <inputColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].Columns[cliente_id]"
+                      cachedDataType="i4"
+                      cachedName="cliente_id"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[cliente_key]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[cliente_id]" />
+                    <inputColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].Columns[vendedor_id]"
+                      cachedDataType="i4"
+                      cachedName="vendedor_id"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[vendedor_key]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[vendedor_id]" />
+                    <inputColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].Columns[producto_id]"
+                      cachedDataType="i4"
+                      cachedName="producto_id"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_key]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[producto_id]" />
+                    <inputColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].Columns[cantidad]"
+                      cachedDataType="numeric"
+                      cachedName="cantidad"
+                      cachedPrecision="12"
+                      cachedScale="4"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[cantidad_productos]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[cantidad]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[venta_id]"
+                      dataType="i4"
+                      name="venta_id" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[fecha_key]"
+                      dataType="i4"
+                      name="fecha_key" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[ubicacion_key]"
+                      dataType="i4"
+                      name="ubicacion_key" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[cliente_key]"
+                      dataType="i4"
+                      name="cliente_key" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[vendedor_key]"
+                      dataType="i4"
+                      name="vendedor_key" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_key]"
+                      dataType="i4"
+                      name="producto_key" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[venta_total]"
+                      dataType="numeric"
+                      name="venta_total"
+                      precision="12"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[venta_total_con_impuestos]"
+                      dataType="numeric"
+                      name="venta_total_con_impuestos"
+                      precision="12"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[suma]"
+                      dataType="numeric"
+                      name="suma"
+                      precision="12"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET].ExternalColumns[cantidad_productos]"
+                      dataType="i4"
+                      name="cantidad_productos" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Llenar FactVentas\Factventas.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Factventas.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Factventas.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Factventas.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Factventas.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Llenar FactVentas\Leer DimVentas"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server."
+              name="Leer DimVentas"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL utilizada por el componente para extraer datos."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    v.id                                   AS venta_id,
+    v.fecha,
+    ISNULL(m.producto_id, 0)               AS producto_id,     -- bolsón DimProducto
+    ISNULL(v.cliente_id, 0)                AS cliente_id,      -- bolsón DimCliente
+    ISNULL(v.vendedor_id, 0)               AS vendedor_id,     -- bolsón DimVendedor
+    ISNULL(c.municipio_id, 0)              AS municipio_id,    -- bolsón DimUbicacion
+    CAST(ISNULL(v.venta_total_con_impuestos,0) AS decimal(12,4)) AS venta_total_con_impuestos,
+    CAST(ISNULL(s.cantidad,0) AS decimal(12,4))                   AS cantidad,
+    CAST(ISNULL(s.cantidad * s.precio_unitario,0) AS decimal(12,4)) AS suma,
+    CAST(ISNULL(s.venta_exenta,0) + ISNULL(s.venta_gravada,0) AS decimal(12,4)) AS venta_total
+FROM ventas v
+JOIN orden_pedidos op ON op.id = v.orden_pedido_id
+JOIN salidas s        ON s.orden_pedido_id = op.id
+JOIN movimientos m    ON m.salida_id = s.id
+JOIN clientes c       ON c.id = v.cliente_id
+JOIN municipios mu    ON mu.id = c.municipio_id;</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si se debe permitir que columnas externas que no sean de cadenas se conviertan implícitamente en cadenas en las columnas de salida."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de origen."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especificar el modo de recuperar información de columnas externas"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Llenar FactVentas\Leer DimVentas.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.transac]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.transac]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET]"
+                  name="Salida de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[venta_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[venta_id]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[venta_id]"
+                      name="venta_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[fecha]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[fecha]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[fecha]"
+                      name="fecha"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[producto_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[producto_id]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[producto_id]"
+                      name="producto_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[cliente_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[cliente_id]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[cliente_id]"
+                      name="cliente_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[vendedor_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[vendedor_id]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[vendedor_id]"
+                      name="vendedor_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[municipio_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[municipio_id]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[municipio_id]"
+                      name="municipio_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[venta_total_con_impuestos]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[venta_total_con_impuestos]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[venta_total_con_impuestos]"
+                      name="venta_total_con_impuestos"
+                      precision="12"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[cantidad]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[cantidad]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[cantidad]"
+                      name="cantidad"
+                      precision="12"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[suma]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[suma]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[suma]"
+                      name="suma"
+                      precision="12"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[venta_total]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[venta_total]"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].Columns[venta_total]"
+                      name="venta_total"
+                      precision="12"
+                      scale="4"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[venta_id]"
+                      dataType="i4"
+                      name="venta_id" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[fecha]"
+                      dataType="dbDate"
+                      name="fecha" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[producto_id]"
+                      dataType="i4"
+                      name="producto_id" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[cliente_id]"
+                      dataType="i4"
+                      name="cliente_id" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[vendedor_id]"
+                      dataType="i4"
+                      name="vendedor_id" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[municipio_id]"
+                      dataType="i4"
+                      name="municipio_id" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[venta_total_con_impuestos]"
+                      dataType="numeric"
+                      name="venta_total_con_impuestos"
+                      precision="12"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[cantidad]"
+                      dataType="numeric"
+                      name="cantidad"
+                      precision="12"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[suma]"
+                      dataType="numeric"
+                      name="suma"
+                      precision="12"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET].ExternalColumns[venta_total]"
+                      dataType="numeric"
+                      name="venta_total"
+                      precision="12"
+                      scale="4" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[venta_id]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[venta_id]"
+                      name="venta_id" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[fecha]"
+                      dataType="dbDate"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[fecha]"
+                      name="fecha" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[producto_id]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[producto_id]"
+                      name="producto_id" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[cliente_id]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[cliente_id]"
+                      name="cliente_id" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[vendedor_id]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[vendedor_id]"
+                      name="vendedor_id" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[municipio_id]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[municipio_id]"
+                      name="municipio_id" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[venta_total_con_impuestos]"
+                      dataType="numeric"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[venta_total_con_impuestos]"
+                      name="venta_total_con_impuestos"
+                      precision="12"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[cantidad]"
+                      dataType="numeric"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[cantidad]"
+                      name="cantidad"
+                      precision="12"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[suma]"
+                      dataType="numeric"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[suma]"
+                      name="suma"
+                      precision="12"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[venta_total]"
+                      dataType="numeric"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[venta_total]"
+                      name="venta_total"
+                      precision="12"
+                      scale="4" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Llenar FactVentas.Paths[Salida de entradas coincidentes de búsqueda]"
+              endId="Package\Llenar FactVentas\Búsqueda Cliente.Inputs[Entrada de búsqueda]"
+              name="Salida de entradas coincidentes de búsqueda"
+              startId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Outputs[Salida de entradas coincidentes de búsqueda]" />
+            <path
+              refId="Package\Llenar FactVentas.Paths[Salida de entradas coincidentes de búsqueda1]"
+              endId="Package\Llenar FactVentas\Búsqueda Vendedor.Inputs[Entrada de búsqueda]"
+              name="Salida de entradas coincidentes de búsqueda"
+              startId="Package\Llenar FactVentas\Búsqueda Cliente.Outputs[Salida de entradas coincidentes de búsqueda]" />
+            <path
+              refId="Package\Llenar FactVentas.Paths[Salida de entradas coincidentes de búsqueda2]"
+              endId="Package\Llenar FactVentas\Búsqueda Producto.Inputs[Entrada de búsqueda]"
+              name="Salida de entradas coincidentes de búsqueda"
+              startId="Package\Llenar FactVentas\Búsqueda Vendedor.Outputs[Salida de entradas coincidentes de búsqueda]" />
+            <path
+              refId="Package\Llenar FactVentas.Paths[Salida de entradas coincidentes de búsqueda3]"
+              endId="Package\Llenar FactVentas\Factventas.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de entradas coincidentes de búsqueda"
+              startId="Package\Llenar FactVentas\Búsqueda Producto.Outputs[Salida de entradas coincidentes de búsqueda]" />
+            <path
+              refId="Package\Llenar FactVentas.Paths[Salida de origen de ADO NET]"
+              endId="Package\Llenar FactVentas\Búsqueda Ubicaciones.Inputs[Entrada de búsqueda]"
+              name="Salida de origen de ADO NET"
+              startId="Package\Llenar FactVentas\Leer DimVentas.Outputs[Salida de origen de ADO NET]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción]"
+      DTS:CreationName=""
+      DTS:DTSID="{ADE47993-96CE-43E4-B313-BC220105B09F}"
+      DTS:From="Package\Limpiar FactVentas"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción"
+      DTS:To="Package\Llenar FactVentas" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Limpiar FactVentas"
+          TopLeft="270,116" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Llenar FactVentas"
+          TopLeft="366,250" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción]"
+          TopLeft="357,158">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="93,92"
+              Start="0,0"
+              End="93,84.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,42"
+                    Point2="0,46"
+                    Point3="4,46" />
+                  <mssgle:LineSegment
+                    End="89,46" />
+                  <mssgle:CubicBezierSegment
+                    Point1="89,46"
+                    Point2="93,46"
+                    Point3="93,50" />
+                  <mssgle:LineSegment
+                    End="93,84.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Llenar FactVentas">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Llenar FactVentas\Leer DimVentas"
+          TopLeft="201,156" />
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Llenar FactVentas\Factventas"
+          TopLeft="851,271" />
+        <NodeLayout
+          Size="192,42"
+          Id="Package\Llenar FactVentas\Búsqueda Ubicaciones"
+          TopLeft="309,233" />
+        <EdgeLayout
+          Id="Package\Llenar FactVentas.Paths[Salida de origen de ADO NET]"
+          TopLeft="280,198">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="125,35"
+              Start="0,0"
+              End="125,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.5"
+                    Point2="0,17.5"
+                    Point3="4,17.5" />
+                  <mssgle:LineSegment
+                    End="121,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="121,17.5"
+                    Point2="125,17.5"
+                    Point3="125,21.5" />
+                  <mssgle:LineSegment
+                    End="125,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Llenar FactVentas\Búsqueda Cliente"
+          TopLeft="408,302" />
+        <EdgeLayout
+          Id="Package\Llenar FactVentas.Paths[Salida de entradas coincidentes de búsqueda]"
+          TopLeft="405,275">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="86,27"
+              Start="0,0"
+              End="86,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.5"
+                    Point2="0,13.5"
+                    Point3="4,13.5" />
+                  <mssgle:LineSegment
+                    End="82,13.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="82,13.5"
+                    Point2="86,13.5"
+                    Point3="86,17.5" />
+                  <mssgle:LineSegment
+                    End="86,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-56.8190234375,18.5,199.638046875,12.1953125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="179,42"
+          Id="Package\Llenar FactVentas\Búsqueda Vendedor"
+          TopLeft="506,378" />
+        <EdgeLayout
+          Id="Package\Llenar FactVentas.Paths[Salida de entradas coincidentes de búsqueda1]"
+          TopLeft="491,344">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="104.5,34"
+              Start="0,0"
+              End="104.5,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13"
+                    Point2="0,17"
+                    Point3="4,17" />
+                  <mssgle:LineSegment
+                    End="100.5,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="100.5,17"
+                    Point2="104.5,17"
+                    Point3="104.5,21" />
+                  <mssgle:LineSegment
+                    End="104.5,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-47.5690234375,22,199.638046875,12.1953125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Llenar FactVentas\Búsqueda Producto"
+          TopLeft="642.5,449.5" />
+        <EdgeLayout
+          Id="Package\Llenar FactVentas.Paths[Salida de entradas coincidentes de búsqueda2]"
+          TopLeft="595.5,420">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="134.5,29.5"
+              Start="0,0"
+              End="134.5,22">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.75"
+                    Point2="0,14.75"
+                    Point3="4,14.75" />
+                  <mssgle:LineSegment
+                    End="130.5,14.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="130.5,14.75"
+                    Point2="134.5,14.75"
+                    Point3="134.5,18.75" />
+                  <mssgle:LineSegment
+                    End="134.5,22" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-41.25701171875,19.75,217.0140234375,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Llenar FactVentas.Paths[Salida de entradas coincidentes de búsqueda3]"
+          TopLeft="757.833333333333,449.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="159.666666666667,-136.5"
+              Start="0,0"
+              End="159.666666666667,-129">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-51.3420158550396" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-51.3420158550396"
+                    Point2="0,-55.3420158550396"
+                    Point3="4,-55.3420158550396" />
+                  <mssgle:LineSegment
+                    End="155.666666666667,-55.3420158550396" />
+                  <mssgle:CubicBezierSegment
+                    Point1="155.666666666667,-55.3420158550396"
+                    Point2="159.666666666667,-55.3420158550396"
+                    Point3="159.666666666667,-59.3420158550396" />
+                  <mssgle:LineSegment
+                    End="159.666666666667,-129" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-19.9856901041667,-50.3420158550396,199.638046875,12.1953125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Llenar FactVentas\Leer DimVentas">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Llenar FactVentas\Factventas">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Llenar FactVentas\Búsqueda Ubicaciones">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimUbicacion]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Llenar FactVentas\Búsqueda Cliente">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimCliente]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Llenar FactVentas\Búsqueda Vendedor">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimVendedor]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Llenar FactVentas\Búsqueda Producto">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimProducto]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,628 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/1/2025 10:50:23 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ARIEL"
+  DTS:CreatorName="ARIEL\ariel"
+  DTS:DTSID="{4D1B0934-60C2-4552-9688-F41D2FDE7F4A}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.1"
+  DTS:LocaleID="17418"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{232C8B00-1DF4-4225-8E0C-5303AE0B086B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.DWLGL]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{0319906E-4AD1-4802-AAD6-86B341FCDF31}"
+      DTS:ObjectName="localhost.DWLGL">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWLGL;Integrated Security=True;TrustServerCertificate=True;Application Name=SSIS-Package1-{0319906E-4AD1-4802-AAD6-86B341FCDF31}localhost.DWLGL;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.transac]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{D89B97EA-4A1A-4440-BB64-57C5A5040599}"
+      DTS:ObjectName="localhost.transac">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=transac;Integrated Security=True;TrustServerCertificate=True;Application Name=SSIS-Package1-{D89B97EA-4A1A-4440-BB64-57C5A5040599}localhost.transac;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Limpiar DimProducto"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{FFAD9742-FDA1-4722-ACED-04894D3EEA1D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Limpiar DimProducto"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0319906E-4AD1-4802-AAD6-86B341FCDF31}"
+          SQLTask:SqlStatementSource="delete DimProducto;&#xA;DBCC CHECKIDENT ('DimProducto', RESEED, 0);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Tarea Flujo de datos"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{BEE486E9-0B89-4BE3-8408-F5749FC7AF66}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tarea Flujo de datos"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Tarea Flujo de datos\DimProducto"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
+              name="DimProducto"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."DimProducto"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea Flujo de datos\DimProducto.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.DWLGL]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.DWLGL]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].Columns[producto_id]"
+                      cachedDataType="i4"
+                      cachedName="producto_id"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_id]"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[producto_id]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].Columns[codigo]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="codigo"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[codigo]"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[codigo]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].Columns[nombre]"
+                      cachedDataType="wstr"
+                      cachedLength="191"
+                      cachedName="nombre"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[nombre]"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[nombre]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].Columns[categoria]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="categoria"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[categoria]"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[categoria]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].Columns[tipo]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="tipo"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[tipo]"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[tipo]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].Columns[costo]"
+                      cachedDataType="numeric"
+                      cachedName="costo"
+                      cachedPrecision="8"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[costo]"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[costo]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].Columns[producto_activo]"
+                      cachedDataType="i4"
+                      cachedName="producto_activo"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_activo]"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[producto_activo]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_key]"
+                      dataType="i4"
+                      name="producto_key" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_id]"
+                      dataType="i4"
+                      name="producto_id" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[codigo]"
+                      dataType="wstr"
+                      length="50"
+                      name="codigo" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[nombre]"
+                      dataType="wstr"
+                      length="191"
+                      name="nombre" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[categoria]"
+                      dataType="wstr"
+                      length="50"
+                      name="categoria" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[tipo]"
+                      dataType="wstr"
+                      length="50"
+                      name="tipo" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[costo]"
+                      dataType="numeric"
+                      name="costo"
+                      precision="8"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_activo]"
+                      dataType="bool"
+                      name="producto_activo" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos\DimProducto.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\DimProducto.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\DimProducto.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\DimProducto.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tarea Flujo de datos\Leer DimProducto"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server."
+              name="Leer DimProducto"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL utilizada por el componente para extraer datos."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+    0                 AS producto_id,
+    ''                AS codigo,
+    ''                AS nombre,
+    ''                AS categoria,
+    ''                AS tipo,
+    CAST(0.00 AS DECIMAL(8,2)) AS costo,
+    0                 AS producto_activo
+UNION ALL
+SELECT 
+    p.id              AS producto_id,
+    p.codigo          AS codigo,
+    p.nombre          AS nombre,
+    c.nombre          AS categoria,
+    t.nombre          AS tipo,
+    CAST(p.costo AS DECIMAL(8,2)) AS costo,
+    p.producto_activo AS producto_activo
+FROM dbo.productos p
+INNER JOIN dbo.categorias c 
+    ON p.categoria_id = c.id
+INNER JOIN dbo.tipo_productos t
+    ON p.tipo_producto_id = t.id;</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si se debe permitir que columnas externas que no sean de cadenas se conviertan implícitamente en cadenas en las columnas de salida."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de origen."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especificar el modo de recuperar información de columnas externas"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea Flujo de datos\Leer DimProducto.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.transac]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.transac]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET]"
+                  name="Salida de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[producto_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].ExternalColumns[producto_id]"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[producto_id]"
+                      name="producto_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[codigo]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].ExternalColumns[codigo]"
+                      length="50"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[codigo]"
+                      name="codigo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[nombre]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].ExternalColumns[nombre]"
+                      length="191"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[nombre]"
+                      name="nombre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[categoria]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].ExternalColumns[categoria]"
+                      length="50"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[categoria]"
+                      name="categoria"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[tipo]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].ExternalColumns[tipo]"
+                      length="50"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[tipo]"
+                      name="tipo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[costo]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].ExternalColumns[costo]"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[costo]"
+                      name="costo"
+                      precision="8"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[producto_activo]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].ExternalColumns[producto_activo]"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[producto_activo]"
+                      name="producto_activo"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].ExternalColumns[producto_id]"
+                      dataType="i4"
+                      name="producto_id" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].ExternalColumns[codigo]"
+                      dataType="wstr"
+                      length="50"
+                      name="codigo" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].ExternalColumns[nombre]"
+                      dataType="wstr"
+                      length="191"
+                      name="nombre" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].ExternalColumns[categoria]"
+                      dataType="wstr"
+                      length="50"
+                      name="categoria" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].ExternalColumns[tipo]"
+                      dataType="wstr"
+                      length="50"
+                      name="tipo" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].ExternalColumns[costo]"
+                      dataType="numeric"
+                      name="costo"
+                      precision="8"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].ExternalColumns[producto_activo]"
+                      dataType="i4"
+                      name="producto_activo" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[producto_id]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[producto_id]"
+                      name="producto_id" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[codigo]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[codigo]"
+                      name="codigo" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[nombre]"
+                      dataType="wstr"
+                      length="191"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[nombre]"
+                      name="nombre" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[categoria]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[categoria]"
+                      name="categoria" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[tipo]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[tipo]"
+                      name="tipo" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[costo]"
+                      dataType="numeric"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[costo]"
+                      name="costo"
+                      precision="8"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[producto_activo]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[producto_activo]"
+                      name="producto_activo" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Tarea Flujo de datos.Paths[Salida de origen de ADO NET]"
+              endId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de origen de ADO NET"
+              startId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción]"
+      DTS:CreationName=""
+      DTS:DTSID="{F28C5EB5-BF2E-4EDB-A7D8-2A0BF3F0A9AD}"
+      DTS:From="Package\Limpiar DimProducto"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción"
+      DTS:To="Package\Tarea Flujo de datos" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Limpiar DimProducto"
+          TopLeft="268,78" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Tarea Flujo de datos"
+          TopLeft="424,200" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción]"
+          TopLeft="359,120">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="155,80"
+              Start="0,0"
+              End="155,72.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36"
+                    Point2="0,40"
+                    Point3="4,40" />
+                  <mssgle:LineSegment
+                    End="151,40" />
+                  <mssgle:CubicBezierSegment
+                    Point1="151,40"
+                    Point2="155,40"
+                    Point3="155,44" />
+                  <mssgle:LineSegment
+                    End="155,72.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Tarea Flujo de datos">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="143,42"
+          Id="Package\Tarea Flujo de datos\DimProducto"
+          TopLeft="389,335" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Tarea Flujo de datos\Leer DimProducto"
+          TopLeft="247,163" />
+        <EdgeLayout
+          Id="Package\Tarea Flujo de datos.Paths[Salida de origen de ADO NET]"
+          TopLeft="331,205">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="129.5,130"
+              Start="0,0"
+              End="129.5,122.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,61"
+                    Point2="0,65"
+                    Point3="4,65" />
+                  <mssgle:LineSegment
+                    End="125.5,65" />
+                  <mssgle:CubicBezierSegment
+                    Point1="125.5,65"
+                    Point2="129.5,65"
+                    Point3="129.5,69" />
+                  <mssgle:LineSegment
+                    End="129.5,122.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tarea Flujo de datos\DimProducto">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tarea Flujo de datos\Leer DimProducto">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

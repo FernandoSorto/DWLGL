@@ -1,0 +1,586 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/1/2025 7:53:16 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ARIEL"
+  DTS:CreatorName="ARIEL\ariel"
+  DTS:DTSID="{E17F7331-91F3-4766-A664-7C6E918F01B7}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.1"
+  DTS:LocaleID="17418"
+  DTS:ObjectName="DimUbicacion"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{AAE175B7-4A7C-4971-85C9-6B2CB958D25F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.DWLGL]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{F8B2FAD0-B392-48E8-B973-DD49C1C5FBB7}"
+      DTS:ObjectName="localhost.DWLGL">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWLGL;Integrated Security=True;TrustServerCertificate=True;Application Name=SSIS-DimUbicacion-{F8B2FAD0-B392-48E8-B973-DD49C1C5FBB7}localhost.DWLGL;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.transac]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{6F80874D-16DA-41B4-97A4-8F64748DC5D1}"
+      DTS:ObjectName="localhost.transac">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=transac;Integrated Security=True;TrustServerCertificate=True;Application Name=SSIS-DimUbicacion-{6F80874D-16DA-41B4-97A4-8F64748DC5D1}localhost.transac;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Limpiar DimUbicacion"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{86AEA4B0-F126-4586-AF1A-4276670D644E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Limpiar DimUbicacion"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F8B2FAD0-B392-48E8-B973-DD49C1C5FBB7}"
+          SQLTask:SqlStatementSource="delete DimUbicacion;&#xA;DBCC CHECKIDENT ('DimUbicacion', RESEED, 0);" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Llenar DimUbicacion"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{C4A3C70C-D408-46C0-9986-9F24466E4395}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Llenar DimUbicacion"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Llenar DimUbicacion\DimUbicaciones"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
+              name="DimUbicaciones"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."DimUbicacion"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Llenar DimUbicacion\DimUbicaciones.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.DWLGL]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.DWLGL]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].Columns[municipio_id]"
+                      cachedDataType="i4"
+                      cachedName="municipio_id"
+                      externalMetadataColumnId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].ExternalColumns[municipio_id]"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[municipio_id]" />
+                    <inputColumn
+                      refId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].Columns[departamento_id]"
+                      cachedDataType="i4"
+                      cachedName="departamento_id"
+                      externalMetadataColumnId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].ExternalColumns[departamento_id]"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[departamento_id]" />
+                    <inputColumn
+                      refId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].Columns[codigo_iso_departamento]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="codigo_iso_departamento"
+                      externalMetadataColumnId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].ExternalColumns[codigo_iso_departamento]"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[codigo_iso_departamento]" />
+                    <inputColumn
+                      refId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].Columns[nombre_municipio]"
+                      cachedDataType="wstr"
+                      cachedLength="191"
+                      cachedName="nombre_municipio"
+                      externalMetadataColumnId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].ExternalColumns[nombre_municipio]"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[nombre_municipio]" />
+                    <inputColumn
+                      refId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].Columns[nombre_departamento]"
+                      cachedDataType="wstr"
+                      cachedLength="191"
+                      cachedName="nombre_departamento"
+                      externalMetadataColumnId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].ExternalColumns[nombre_departamento]"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[nombre_departamento]" />
+                    <inputColumn
+                      refId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].Columns[nombre_completo_ubicacion]"
+                      cachedDataType="wstr"
+                      cachedLength="385"
+                      cachedName="nombre_completo_ubicacion"
+                      externalMetadataColumnId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].ExternalColumns[nombre_completo_ubicacion]"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[nombre_completo_ubicacion]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].ExternalColumns[ubicacion_key]"
+                      dataType="i4"
+                      name="ubicacion_key" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].ExternalColumns[municipio_id]"
+                      dataType="i4"
+                      name="municipio_id" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].ExternalColumns[departamento_id]"
+                      dataType="i4"
+                      name="departamento_id" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].ExternalColumns[codigo_iso_departamento]"
+                      dataType="wstr"
+                      length="6"
+                      name="codigo_iso_departamento" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].ExternalColumns[nombre_municipio]"
+                      dataType="wstr"
+                      length="191"
+                      name="nombre_municipio" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].ExternalColumns[nombre_departamento]"
+                      dataType="wstr"
+                      length="191"
+                      name="nombre_departamento" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET].ExternalColumns[nombre_completo_ubicacion]"
+                      dataType="wstr"
+                      length="400"
+                      name="nombre_completo_ubicacion" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Llenar DimUbicacion\DimUbicaciones.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenar DimUbicacion\DimUbicaciones.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Llenar DimUbicacion\DimUbicaciones.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Llenar DimUbicacion\DimUbicaciones.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Llenar DimUbicacion\DimUbicaciones.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Llenar DimUbicacion\Leer Ubicaciones"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server."
+              name="Leer Ubicaciones"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL utilizada por el componente para extraer datos."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    0                AS municipio_id,
+    0                AS departamento_id,
+    ''               AS codigo_iso_departamento,
+    ''               AS nombre_municipio,
+    ''               AS nombre_departamento,
+    ''               AS nombre_completo_ubicacion
+UNION ALL
+SELECT 
+    m.id                AS municipio_id,
+    d.id                AS departamento_id,
+    d.isocode           AS codigo_iso_departamento,
+    m.nombre            AS nombre_municipio,
+    d.nombre            AS nombre_departamento,
+    m.nombre + ' - ' + d.nombre AS nombre_completo_ubicacion
+FROM dbo.municipios m
+INNER JOIN dbo.departamentos d 
+    ON m.departamento_id = d.id;</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si se debe permitir que columnas externas que no sean de cadenas se conviertan implícitamente en cadenas en las columnas de salida."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de origen."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especificar el modo de recuperar información de columnas externas"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.transac]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.transac]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET]"
+                  name="Salida de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[municipio_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].ExternalColumns[municipio_id]"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[municipio_id]"
+                      name="municipio_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[departamento_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].ExternalColumns[departamento_id]"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[departamento_id]"
+                      name="departamento_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[codigo_iso_departamento]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].ExternalColumns[codigo_iso_departamento]"
+                      length="6"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[codigo_iso_departamento]"
+                      name="codigo_iso_departamento"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[nombre_municipio]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].ExternalColumns[nombre_municipio]"
+                      length="191"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[nombre_municipio]"
+                      name="nombre_municipio"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[nombre_departamento]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].ExternalColumns[nombre_departamento]"
+                      length="191"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[nombre_departamento]"
+                      name="nombre_departamento"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[nombre_completo_ubicacion]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].ExternalColumns[nombre_completo_ubicacion]"
+                      length="385"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].Columns[nombre_completo_ubicacion]"
+                      name="nombre_completo_ubicacion"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].ExternalColumns[municipio_id]"
+                      dataType="i4"
+                      name="municipio_id" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].ExternalColumns[departamento_id]"
+                      dataType="i4"
+                      name="departamento_id" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].ExternalColumns[codigo_iso_departamento]"
+                      dataType="wstr"
+                      length="6"
+                      name="codigo_iso_departamento" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].ExternalColumns[nombre_municipio]"
+                      dataType="wstr"
+                      length="191"
+                      name="nombre_municipio" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].ExternalColumns[nombre_departamento]"
+                      dataType="wstr"
+                      length="191"
+                      name="nombre_departamento" />
+                    <externalMetadataColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET].ExternalColumns[nombre_completo_ubicacion]"
+                      dataType="wstr"
+                      length="385"
+                      name="nombre_completo_ubicacion" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET].Columns[municipio_id]"
+                      dataType="i4"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET].Columns[municipio_id]"
+                      name="municipio_id" />
+                    <outputColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET].Columns[departamento_id]"
+                      dataType="i4"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET].Columns[departamento_id]"
+                      name="departamento_id" />
+                    <outputColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET].Columns[codigo_iso_departamento]"
+                      dataType="wstr"
+                      length="6"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET].Columns[codigo_iso_departamento]"
+                      name="codigo_iso_departamento" />
+                    <outputColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET].Columns[nombre_municipio]"
+                      dataType="wstr"
+                      length="191"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET].Columns[nombre_municipio]"
+                      name="nombre_municipio" />
+                    <outputColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET].Columns[nombre_departamento]"
+                      dataType="wstr"
+                      length="191"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET].Columns[nombre_departamento]"
+                      name="nombre_departamento" />
+                    <outputColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET].Columns[nombre_completo_ubicacion]"
+                      dataType="wstr"
+                      length="385"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET].Columns[nombre_completo_ubicacion]"
+                      name="nombre_completo_ubicacion" />
+                    <outputColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Llenar DimUbicacion.Paths[Salida de origen de ADO NET]"
+              endId="Package\Llenar DimUbicacion\DimUbicaciones.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de origen de ADO NET"
+              startId="Package\Llenar DimUbicacion\Leer Ubicaciones.Outputs[Salida de origen de ADO NET]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción]"
+      DTS:CreationName=""
+      DTS:DTSID="{9C466B2F-17EE-4C3D-B462-270D7E5ADB35}"
+      DTS:From="Package\Limpiar DimUbicacion"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción"
+      DTS:To="Package\Llenar DimUbicacion" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="186,42"
+          Id="Package\Limpiar DimUbicacion"
+          TopLeft="216,128" />
+        <NodeLayout
+          Size="181,42"
+          Id="Package\Llenar DimUbicacion"
+          TopLeft="436,265" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción]"
+          TopLeft="309,170">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="217.5,95"
+              Start="0,0"
+              End="217.5,87.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,43.5"
+                    Point2="0,47.5"
+                    Point3="4,47.5" />
+                  <mssgle:LineSegment
+                    End="213.5,47.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="213.5,47.5"
+                    Point2="217.5,47.5"
+                    Point3="217.5,51.5" />
+                  <mssgle:LineSegment
+                    End="217.5,87.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Llenar DimUbicacion">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Llenar DimUbicacion\Leer Ubicaciones"
+          TopLeft="275,187" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Llenar DimUbicacion\DimUbicaciones"
+          TopLeft="400,317" />
+        <EdgeLayout
+          Id="Package\Llenar DimUbicacion.Paths[Salida de origen de ADO NET]"
+          TopLeft="357,229">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="122.5,88"
+              Start="0,0"
+              End="122.5,80.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,40"
+                    Point2="0,44"
+                    Point3="4,44" />
+                  <mssgle:LineSegment
+                    End="118.5,44" />
+                  <mssgle:CubicBezierSegment
+                    Point1="118.5,44"
+                    Point2="122.5,44"
+                    Point3="122.5,48" />
+                  <mssgle:LineSegment
+                    End="122.5,80.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Llenar DimUbicacion\DimUbicaciones">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Llenar DimUbicacion\Leer Ubicaciones">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
