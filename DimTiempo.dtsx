@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="DimTiempo"
   DTS:PackageType="5"
-  DTS:VersionBuild="8"
-  DTS:VersionGUID="{6019C7A9-DCA7-44A5-8248-A0B8C0340056}">
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{0B63DB00-2AF5-4253-A451-4E7E1AD3D3F6}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
