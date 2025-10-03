@@ -2,7 +2,7 @@
 <BuildLog xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProjectInfo>
     <Name>DWLGL</Name>
-    <LastWriteTime>2025-10-03T01:25:52.7966602Z</LastWriteTime>
+    <LastWriteTime>2025-10-03T02:00:46.6904374Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
@@ -18,7 +18,7 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>DimCliente.dtsx</Name>
-      <LastWriteTime>2025-10-02T16:03:57.4469664Z</LastWriteTime>
+      <LastWriteTime>2025-10-03T02:00:46.6517795Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
