@@ -7,12 +7,12 @@
   DTS:CreatorName="LUFESO\lufes"
   DTS:DTSID="{4BDD8BCE-630B-4DC2-879B-4FAE6872141C}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5685.2"
+  DTS:LastModifiedProductVersion="16.0.5685.1"
   DTS:LocaleID="1033"
   DTS:ObjectName="DimTiempo"
   DTS:PackageType="5"
-  DTS:VersionBuild="9"
-  DTS:VersionGUID="{0B63DB00-2AF5-4253-A451-4E7E1AD3D3F6}">
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{EB650616-F3B5-4199-B756-6A446DB97FD4}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -30,7 +30,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="C:\Users\lufes\OneDrive\Documents\GitHub\DWLGL\dimdates.csv">
+          DTS:ConnectionString="C:\Users\ariel\OneDrive\Documentos\GitHub\DWLGL\dimdates.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -39,7 +39,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="tiempo_key"
-              DTS:DTSID="{6EB44E28-08B1-4D78-81E6-28A6B5FD288A}"
+              DTS:DTSID="{EE9E795A-5FAE-4F77-BF29-90FA20FC0D53}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -48,7 +48,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="fecha"
-              DTS:DTSID="{35CF186D-8837-481C-95FD-09A7F36D7F39}"
+              DTS:DTSID="{59FE3646-3769-486B-8286-CA77E1956873}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -57,7 +57,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="nombre_dia"
-              DTS:DTSID="{06C9A69C-ED31-429D-AE98-62185BD9CAC3}"
+              DTS:DTSID="{A5E00161-D650-4FCB-B587-261117245D66}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -66,7 +66,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="nombre_mes"
-              DTS:DTSID="{86F1A21D-AD22-4A1E-817B-EAC42A946CA8}"
+              DTS:DTSID="{43214935-B44E-4DE9-9125-20FF185E8FCB}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -75,7 +75,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="mes"
-              DTS:DTSID="{DE6B559A-516B-488E-9469-6AE0CC9DB03A}"
+              DTS:DTSID="{75354E02-C77B-4835-A488-4ACA8A774739}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -84,7 +84,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="dia"
-              DTS:DTSID="{5F0D797E-08BF-4B0E-9B09-6372DBFCF3F0}"
+              DTS:DTSID="{180AF568-59AB-47D4-A9B6-ABECE0354DDE}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -93,10 +93,20 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="anio"
-              DTS:DTSID="{F122926B-421B-412C-8946-424BE93FE60F}"
+              DTS:DTSID="{C5AC8D82-F9F6-4F8D-B41B-4C1B2AD0AE4C}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.DWLGL]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{24B17E59-BE48-4781-BB5F-088D080656BC}"
+      DTS:ObjectName="localhost.DWLGL">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWLGL;Integrated Security=True;TrustServerCertificate=True;Application Name=SSIS-DimTiempo-{24B17E59-BE48-4781-BB5F-088D080656BC}localhost.DWLGL;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -163,8 +173,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task\Cargar DimTiempo.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[LUFESO.DWLGL]"
-                  connectionManagerRefId="Package.ConnectionManagers[LUFESO.DWLGL]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.DWLGL]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.DWLGL]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -183,22 +193,6 @@
                       cachedName="fecha"
                       externalMetadataColumnId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[fecha]"
                       lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[fecha]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].Columns[nombre_dia]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="nombre_dia"
-                      externalMetadataColumnId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[nombre_dia]"
-                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[nombre_dia]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].Columns[nombre_mes]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="50"
-                      cachedName="nombre_mes"
-                      externalMetadataColumnId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[nombre_mes]"
-                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[nombre_mes]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].Columns[mes]"
                       cachedCodepage="1252"
@@ -242,16 +236,6 @@
                       refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[fecha]"
                       dataType="dbTimeStamp"
                       name="fecha" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[nombre_dia]"
-                      dataType="wstr"
-                      length="70"
-                      name="nombre_dia" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[nombre_mes]"
-                      dataType="wstr"
-                      length="70"
-                      name="nombre_mes" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[dia]"
                       dataType="ui1"
@@ -577,7 +561,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{8EAC62F4-135F-44CF-BC33-F499D5C8D5A1}"
+          SQLTask:Connection="{24B17E59-BE48-4781-BB5F-088D080656BC}"
           SQLTask:SqlStatementSource="DELETE DimTiempo" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -593,12 +577,12 @@
       DTS:To="Package\Data Flow Task" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
-<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
-<!--If you manually edit this section and make a mistake, you can delete it. -->
-<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
 <Objects
   Version="8">
-  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
   <Package
     design-time-name="Package">
     <LayoutInfo>
