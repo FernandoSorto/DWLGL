@@ -7,20 +7,20 @@
   DTS:CreatorName="LUFESO\lufes"
   DTS:DTSID="{4BDD8BCE-630B-4DC2-879B-4FAE6872141C}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5685.1"
+  DTS:LastModifiedProductVersion="16.0.5685.2"
   DTS:LocaleID="1033"
   DTS:ObjectName="DimTiempo"
   DTS:PackageType="5"
-  DTS:VersionBuild="14"
-  DTS:VersionGUID="{EB650616-F3B5-4199-B756-6A446DB97FD4}">
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{26E9BA66-2E2B-47EE-BEAF-5B6D694EB7C5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[csv manager]"
+      DTS:refId="Package.ConnectionManagers[csv_manager_ariel]"
       DTS:CreationName="FLATFILE"
       DTS:DTSID="{13EC09B7-6E03-4B7F-AA1D-8DD2543737E7}"
-      DTS:ObjectName="csv manager">
+      DTS:ObjectName="csv_manager_ariel">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Format="Delimited"
@@ -39,7 +39,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="tiempo_key"
-              DTS:DTSID="{EE9E795A-5FAE-4F77-BF29-90FA20FC0D53}"
+              DTS:DTSID="{D685680E-D0E0-4BBC-8F55-9794CA7E7ED4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -48,7 +48,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="fecha"
-              DTS:DTSID="{59FE3646-3769-486B-8286-CA77E1956873}"
+              DTS:DTSID="{4666E3E4-DC78-4A61-86DE-D81767E13531}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -57,7 +57,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="nombre_dia"
-              DTS:DTSID="{A5E00161-D650-4FCB-B587-261117245D66}"
+              DTS:DTSID="{391448F5-DC61-4C75-885B-63D7F5B2A77C}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -66,7 +66,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="nombre_mes"
-              DTS:DTSID="{43214935-B44E-4DE9-9125-20FF185E8FCB}"
+              DTS:DTSID="{22AFA5CB-7593-4522-87EF-542213FBAC56}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -75,7 +75,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="mes"
-              DTS:DTSID="{75354E02-C77B-4835-A488-4ACA8A774739}"
+              DTS:DTSID="{006A83CA-74A9-4263-B44A-B85CAD848092}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -84,7 +84,7 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="dia"
-              DTS:DTSID="{180AF568-59AB-47D4-A9B6-ABECE0354DDE}"
+              DTS:DTSID="{2F2DE66C-7193-4D5E-A50A-D1D28D6CBBF5}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -93,7 +93,90 @@
               DTS:DataType="129"
               DTS:TextQualified="True"
               DTS:ObjectName="anio"
-              DTS:DTSID="{C5AC8D82-F9F6-4F8D-B41B-4C1B2AD0AE4C}"
+              DTS:DTSID="{3F4FCD1B-953C-48AE-8266-E9DF557E358A}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[csv_manager_luis]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{7413F8E4-220A-4DD1-B5E9-45D203FF0043}"
+      DTS:ObjectName="csv_manager_luis">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Users\lufes\OneDrive\Documents\GitHub\DWLGL\dimdates.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="tiempo_key"
+              DTS:DTSID="{4ED6F37E-F1A4-47E3-9B26-4438B0EB8226}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fecha"
+              DTS:DTSID="{3EA3448C-F62F-4EBE-A632-E325FCFA6822}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="nombre_dia"
+              DTS:DTSID="{F3813826-B403-49E9-9452-8C97BF2C21F6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="nombre_mes"
+              DTS:DTSID="{62437421-36D6-424A-85DD-8CB0958431C1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="mes"
+              DTS:DTSID="{20A557C8-5EDF-46F8-A08C-C464766B6D2C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="dia"
+              DTS:DTSID="{6753FD89-2672-4BDC-9323-EDE9742781C3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="anio"
+              DTS:DTSID="{A9D315A9-C31C-42E5-AF0E-D7E7544C4B10}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -173,8 +256,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task\Cargar DimTiempo.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[localhost.DWLGL]"
-                  connectionManagerRefId="Package.ConnectionManagers[localhost.DWLGL]"
+                  connectionManagerID="Package.ConnectionManagers[LUFESO.DWLGL]"
+                  connectionManagerRefId="Package.ConnectionManagers[LUFESO.DWLGL]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -193,6 +276,22 @@
                       cachedName="fecha"
                       externalMetadataColumnId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[fecha]"
                       lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[fecha]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].Columns[nombre_dia]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="nombre_dia"
+                      externalMetadataColumnId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[nombre_dia]"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[nombre_dia]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].Columns[nombre_mes]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="nombre_mes"
+                      externalMetadataColumnId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[nombre_mes]"
+                      lineageId="Package\Data Flow Task\Leer CSV fechas.Outputs[Flat File Source Output].Columns[nombre_mes]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].Columns[mes]"
                       cachedCodepage="1252"
@@ -236,6 +335,16 @@
                       refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[fecha]"
                       dataType="dbTimeStamp"
                       name="fecha" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[nombre_dia]"
+                      dataType="wstr"
+                      length="70"
+                      name="nombre_dia" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[nombre_mes]"
+                      dataType="wstr"
+                      length="70"
+                      name="nombre_mes" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\Cargar DimTiempo.Inputs[ADO NET Destination Input].ExternalColumns[dia]"
                       dataType="ui1"
@@ -298,8 +407,8 @@
               <connections>
                 <connection
                   refId="Package\Data Flow Task\Leer CSV fechas.Connections[FlatFileConnection]"
-                  connectionManagerID="Package.ConnectionManagers[csv manager]"
-                  connectionManagerRefId="Package.ConnectionManagers[csv manager]"
+                  connectionManagerID="Package.ConnectionManagers[csv_manager_luis]"
+                  connectionManagerRefId="Package.ConnectionManagers[csv_manager_luis]"
                   name="FlatFileConnection" />
               </connections>
               <outputs>
@@ -577,12 +686,12 @@
       DTS:To="Package\Data Flow Task" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
-<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
-<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
-<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
   Version="8">
-  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">
     <LayoutInfo>
@@ -645,33 +754,33 @@
         <NodeLayout
           Size="172,42"
           Id="Package\Data Flow Task\Cargar DimTiempo"
-          TopLeft="642,374" />
+          TopLeft="644,372" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Flat File Source Output]"
           TopLeft="426.5,235.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="301.5,138.5"
+              EndConnector="303.5,136.5"
               Start="0,0"
-              End="301.5,131">
+              End="303.5,129">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,65.25" />
+                    End="0,64.25" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,65.25"
-                    Point2="0,69.25"
-                    Point3="4,69.25" />
+                    Point1="0,64.25"
+                    Point2="0,68.25"
+                    Point3="4,68.25" />
                   <mssgle:LineSegment
-                    End="297.5,69.25" />
+                    End="299.5,68.25" />
                   <mssgle:CubicBezierSegment
-                    Point1="297.5,69.25"
-                    Point2="301.5,69.25"
-                    Point3="301.5,73.25" />
+                    Point1="299.5,68.25"
+                    Point2="303.5,68.25"
+                    Point3="303.5,72.25" />
                   <mssgle:LineSegment
-                    End="301.5,131" />
+                    End="303.5,129" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

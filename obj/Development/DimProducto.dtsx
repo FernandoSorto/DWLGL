@@ -7,12 +7,12 @@
   DTS:CreatorName="ARIEL\ariel"
   DTS:DTSID="{4D1B0934-60C2-4552-9688-F41D2FDE7F4A}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5685.1"
+  DTS:LastModifiedProductVersion="16.0.5685.2"
   DTS:LocaleID="17418"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{2E994172-05A1-4493-95CA-697AAB4A56CE}">
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{C7D51BE4-A7EE-426C-8BDD-F40CD799C69D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -46,6 +46,16 @@
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectionString="Data Source=localhost;Initial Catalog=transac;Integrated Security=True;TrustServerCertificate=True;Application Name=SSIS-Package1-{D89B97EA-4A1A-4440-BB64-57C5A5040599}localhost.transac;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LUFESO.DWLGL]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{8F1FFB28-30D1-405D-A09A-6A2D18E77CA6}"
+      DTS:ObjectName="LUFESO.DWLGL">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=LUFESO;Initial Catalog=DWLGL;Integrated Security=True;TrustServerCertificate=True;Application Name=SSIS-Package1-{8F1FFB28-30D1-405D-A09A-6A2D18E77CA6}LUFESO.DWLGL;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -1066,12 +1076,12 @@ INNER JOIN dbo.tipo_productos t
       DTS:To="Package\Tarea Flujo de datos" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
-<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
-<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
-<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
   Version="8">
-  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">
     <LayoutInfo>
@@ -1080,37 +1090,37 @@ INNER JOIN dbo.tipo_productos t
         <NodeLayout
           Size="182,42"
           Id="Package\Limpiar DimProducto"
-          TopLeft="268,78" />
+          TopLeft="267,77" />
         <NodeLayout
           Size="180,42"
           Id="Package\Tarea Flujo de datos"
           TopLeft="424,200" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción]"
-          TopLeft="359,120">
+          TopLeft="358,119">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="155,80"
+              EndConnector="156,81"
               Start="0,0"
-              End="155,72.5">
+              End="156,73.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,36" />
+                    End="0,36.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,36"
-                    Point2="0,40"
-                    Point3="4,40" />
+                    Point1="0,36.5"
+                    Point2="0,40.5"
+                    Point3="4,40.5" />
                   <mssgle:LineSegment
-                    End="151,40" />
+                    End="152,40.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="151,40"
-                    Point2="155,40"
-                    Point3="155,44" />
+                    Point1="152,40.5"
+                    Point2="156,40.5"
+                    Point3="156,44.5" />
                   <mssgle:LineSegment
-                    End="155,72.5" />
+                    End="156,73.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1128,17 +1138,59 @@ INNER JOIN dbo.tipo_productos t
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="175,42"
+          Id="Package\Tarea Flujo de datos\Búsqueda Producto"
+          TopLeft="341,138" />
+        <NodeLayout
           Size="215,42"
           Id="Package\Tarea Flujo de datos\Datos Nuevos DimProducto"
-          TopLeft="301,293" />
+          TopLeft="291,298" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Tarea Flujo de datos\Conversión de datos"
+          TopLeft="626,215" />
         <NodeLayout
           Size="168,42"
           Id="Package\Tarea Flujo de datos\Leer DimProducto"
           TopLeft="196,70" />
         <NodeLayout
-          Size="175,42"
-          Id="Package\Tarea Flujo de datos\Búsqueda Producto"
-          TopLeft="341,138" />
+          Size="194,42"
+          Id="Package\Tarea Flujo de datos\Actualizar DimProducto"
+          TopLeft="714,321" />
+        <EdgeLayout
+          Id="Package\Tarea Flujo de datos.Paths[Salida de conversión de datos]"
+          TopLeft="716,257">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="95,64"
+              Start="0,0"
+              End="95,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28"
+                    Point2="0,32"
+                    Point3="4,32" />
+                  <mssgle:LineSegment
+                    End="91,32" />
+                  <mssgle:CubicBezierSegment
+                    Point1="91,32"
+                    Point2="95,32"
+                    Point3="95,36" />
+                  <mssgle:LineSegment
+                    End="95,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Tarea Flujo de datos.Paths[Salida de origen de ADO NET]"
           TopLeft="280,112">
@@ -1175,48 +1227,28 @@ INNER JOIN dbo.tipo_productos t
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Tarea Flujo de datos.Paths[Salida de entradas no coincidentes de búsqueda]"
-          TopLeft="428.5,180">
+          TopLeft="399.583333333333,180">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-20,113"
+              EndConnector="0,118"
               Start="0,0"
-              End="-20,105.5">
+              End="0,110.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,52.5"
-                    Point2="0,56.5"
-                    Point3="-4,56.5" />
-                  <mssgle:LineSegment
-                    End="-16,56.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-16,56.5"
-                    Point2="-20,56.5"
-                    Point3="-20,60.5" />
-                  <mssgle:LineSegment
-                    End="-20,105.5" />
+                    End="0,110.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-116.8890234375,61.5,213.778046875,12.1953125"
+              BoundingBox="-106.8890234375,49.15234375,213.778046875,12.1953125"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="194,42"
-          Id="Package\Tarea Flujo de datos\Actualizar DimProducto"
-          TopLeft="714,321" />
-        <NodeLayout
-          Size="180,42"
-          Id="Package\Tarea Flujo de datos\Conversión de datos"
-          TopLeft="626,215" />
         <EdgeLayout
           Id="Package\Tarea Flujo de datos.Paths[Salida de entradas coincidentes de búsqueda]"
           TopLeft="456.333333333333,180">
@@ -1253,46 +1285,27 @@ INNER JOIN dbo.tipo_productos t
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Tarea Flujo de datos.Paths[Salida de conversión de datos]"
-          TopLeft="716,257">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="95,64"
-              Start="0,0"
-              End="95,56.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,28" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,28"
-                    Point2="0,32"
-                    Point3="4,32" />
-                  <mssgle:LineSegment
-                    End="91,32" />
-                  <mssgle:CubicBezierSegment
-                    Point1="91,32"
-                    Point2="95,32"
-                    Point3="95,36" />
-                  <mssgle:LineSegment
-                    End="95,56.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Tarea Flujo de datos\Datos Nuevos DimProducto">
+    design-time-name="Package\Tarea Flujo de datos\Búsqueda Producto">
     <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimProducto]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
@@ -1307,23 +1320,8 @@ INNER JOIN dbo.tipo_productos t
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Tarea Flujo de datos\Búsqueda Producto">
+    design-time-name="Package\Tarea Flujo de datos\Datos Nuevos DimProducto">
     <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[DimProducto]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
