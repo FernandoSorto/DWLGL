@@ -7,12 +7,12 @@
   DTS:CreatorName="ARIEL\ariel"
   DTS:DTSID="{4D1B0934-60C2-4552-9688-F41D2FDE7F4A}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5685.1"
+  DTS:LastModifiedProductVersion="16.0.5685.2"
   DTS:LocaleID="17418"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{232C8B00-1DF4-4225-8E0C-5303AE0B086B}">
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{C7D51BE4-A7EE-426C-8BDD-F40CD799C69D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -27,6 +27,18 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.DWLGL1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{77E63DFE-54AC-40FD-81D9-37F69F15F2C9}"
+      DTS:ObjectName="localhost.DWLGL1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWLGL;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{77E63DFE-54AC-40FD-81D9-37F69F15F2C9}localhost.DWLGL1;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[localhost.transac]"
       DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
       DTS:DTSID="{D89B97EA-4A1A-4440-BB64-57C5A5040599}"
@@ -36,6 +48,16 @@
           DTS:ConnectionString="Data Source=localhost;Initial Catalog=transac;Integrated Security=True;TrustServerCertificate=True;Application Name=SSIS-Package1-{D89B97EA-4A1A-4440-BB64-57C5A5040599}localhost.transac;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LUFESO.DWLGL]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{8F1FFB28-30D1-405D-A09A-6A2D18E77CA6}"
+      DTS:ObjectName="LUFESO.DWLGL">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=LUFESO;Initial Catalog=DWLGL;Integrated Security=True;TrustServerCertificate=True;Application Name=SSIS-Package1-{8F1FFB28-30D1-405D-A09A-6A2D18E77CA6}LUFESO.DWLGL;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
@@ -43,6 +65,7 @@
       DTS:refId="Package\Limpiar DimProducto"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Tarea Ejecutar SQL"
+      DTS:Disabled="True"
       DTS:DTSID="{FFAD9742-FDA1-4722-ACED-04894D3EEA1D}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -71,11 +94,547 @@
           version="1">
           <components>
             <component
-              refId="Package\Tarea Flujo de datos\DimProducto"
+              refId="Package\Tarea Flujo de datos\Actualizar DimProducto"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="Comando de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Ejecuta una instrucción SQL para cada fila de un flujo de datos. Por ejemplo, se usa para llamar al procedimiento almacenado de configuración de nuevo empleado para cada fila de la tabla de nuevos empleados. Nota: la ejecución de una instrucción SQL para cada fila de un flujo de datos de gran tamaño puede tardar mucho tiempo."
+              name="Actualizar DimProducto"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">exec ActualizarProducto ?,?,?,?,?,?,?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.DWLGL1]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.DWLGL1]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB]"
+                  errorOrTruncationOperation="Ejecución de comando"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de comando de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].Columns[producto_id]"
+                      cachedDataType="i4"
+                      cachedName="producto_id"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].ExternalColumns[@ProductoID]"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[producto_id]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].Columns[costo]"
+                      cachedDataType="numeric"
+                      cachedName="costo"
+                      cachedPrecision="8"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].ExternalColumns[@Costo]"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[costo]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].Columns[producto_activo]"
+                      cachedDataType="i4"
+                      cachedName="producto_activo"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].ExternalColumns[@ProductoActivo]"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[producto_activo]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].Columns[codigoConv]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="codigoConv"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].ExternalColumns[@Codigo]"
+                      lineageId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de conversión de datos].Columns[codigoConv]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].Columns[nombreConv]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="191"
+                      cachedName="nombreConv"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].ExternalColumns[@Nombre]"
+                      lineageId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de conversión de datos].Columns[nombreConv]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].Columns[categoriaConv]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="categoriaConv"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].ExternalColumns[@Categoria]"
+                      lineageId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de conversión de datos].Columns[categoriaConv]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].Columns[tipoConv]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="tipoConv"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].ExternalColumns[@Tipo]"
+                      lineageId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de conversión de datos].Columns[tipoConv]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].ExternalColumns[@ProductoID]"
+                      dataType="i4"
+                      name="@ProductoID">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Información de parámetros. Coincide con los valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].ExternalColumns[@Codigo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="@Codigo">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Información de parámetros. Coincide con los valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].ExternalColumns[@Nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="191"
+                      name="@Nombre">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Información de parámetros. Coincide con los valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].ExternalColumns[@Categoria]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="@Categoria">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Información de parámetros. Coincide con los valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].ExternalColumns[@Tipo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="@Tipo">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Información de parámetros. Coincide con los valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].ExternalColumns[@Costo]"
+                      dataType="numeric"
+                      name="@Costo"
+                      precision="8"
+                      scale="2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Información de parámetros. Coincide con los valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB].ExternalColumns[@ProductoActivo]"
+                      dataType="bool"
+                      name="@ProductoActivo">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Información de parámetros. Coincide con los valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Outputs[Salida de comando de OLE DB]"
+                  exclusionGroup="1"
+                  name="Salida de comando de OLE DB"
+                  synchronousInputId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Outputs[Salida de error de comando de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de comando de OLE DB"
+                  synchronousInputId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Outputs[Salida de error de comando de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\Actualizar DimProducto.Outputs[Salida de error de comando de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Actualizar DimProducto.Outputs[Salida de error de comando de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\Actualizar DimProducto.Outputs[Salida de error de comando de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tarea Flujo de datos\Búsqueda Producto"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Búsqueda;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;6"
+              description="Combina columnas adicionales con el flujo de datos mediante la búsqueda de valores en una tabla. Por ejemplo, se combina la columna 'id. de empleado' con la tabla de empleados para obtener la 'fecha de contratación' y 'el nombre de empleado'. Se recomienda esta transformación cuando hay suficiente espacio en memoria para la tabla de búsqueda."
+              name="Búsqueda Producto"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL que genera la tabla de búsqueda."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimProducto]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica una instrucción SQL que usa parámetros para generar la tabla de búsqueda."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimProducto]) [refTable]
+where [refTable].[producto_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de conexión utilizado para tener acceso al conjunto de datos de referencia."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de caché de la tabla de búsqueda."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cómo la transformación de búsquedas trata las filas sin entradas coincidentes en el conjunto de datos de referencia."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el porcentaje de la caché asignado a las filas sin entradas coincidentes en el conjunto de datos de referencia."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Uso de memoria máximo para la caché de referencia en una plataforma de 32 bits."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Uso de memoria máximo para la caché de referencia en una plataforma de 64 bits."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indica si se debe hacer referencia a metadatos en formato XML."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="producto_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="producto_id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="codigo" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="nombre" dataType="DT_STR" length="191" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="categoria" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="tipo" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="costo" dataType="DT_NUMERIC" length="0" precision="8" scale="2" codePage="0"/&gt;&lt;referenceColumn name="producto_activo" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="activo" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="fechaInicio" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="fechafin" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Especifica la lista de identificadores de linaje que están asignados a los parámetros que usa la instrucción SQL de la propiedad SQLCommand. Las entradas de la lista están separadas por puntos y comas."
+                  name="ParameterMap">#{Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[producto_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determina si las claves duplicadas de los datos de referencia se deben tratar como errores cuando se usa el modo de caché."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Tarea Flujo de datos\Búsqueda Producto.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.DWLGL1]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.DWLGL1]"
+                  description="Administrador de conexiones utilizado para obtener acceso a los datos de búsqueda."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Tarea Flujo de datos\Búsqueda Producto.Inputs[Entrada de búsqueda]"
+                  name="Entrada de búsqueda">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Búsqueda Producto.Inputs[Entrada de búsqueda].Columns[producto_id]"
+                      cachedDataType="i4"
+                      cachedName="producto_id"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[producto_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Especifica la columna de la tabla de referencia con la que se combina una columna."
+                          name="JoinToReferenceColumn">producto_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Especifica la columna de la tabla de referencia de la que se copia una columna."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos\Búsqueda Producto.Outputs[Salida de entradas coincidentes de búsqueda]"
+                  errorOrTruncationOperation="Búsqueda"
+                  exclusionGroup="1"
+                  name="Salida de entradas coincidentes de búsqueda"
+                  synchronousInputId="Package\Tarea Flujo de datos\Búsqueda Producto.Inputs[Entrada de búsqueda]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Búsqueda Producto.Outputs[Salida de entradas coincidentes de búsqueda].Columns[producto_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copiar columna"
+                      lineageId="Package\Tarea Flujo de datos\Búsqueda Producto.Outputs[Salida de entradas coincidentes de búsqueda].Columns[producto_key]"
+                      name="producto_key"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Especifica la columna de la tabla de referencia de la que se copia una columna."
+                          name="CopyFromReferenceColumn">producto_key</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Tarea Flujo de datos\Búsqueda Producto.Outputs[Salida de entradas no coincidentes de búsqueda]"
+                  description="Salida de búsqueda que trata las filas sin entradas coincidentes en el conjunto de datos de referencia. Utilice esta salida cuando la propiedad NoMatchBehavior esté establecida en 'Enviar las filas sin entradas coincidentes a la salida de entradas no coincidentes'."
+                  exclusionGroup="1"
+                  name="Salida de entradas no coincidentes de búsqueda"
+                  synchronousInputId="Package\Tarea Flujo de datos\Búsqueda Producto.Inputs[Entrada de búsqueda]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Tarea Flujo de datos\Búsqueda Producto.Outputs[Salida de error de búsqueda]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de búsqueda"
+                  synchronousInputId="Package\Tarea Flujo de datos\Búsqueda Producto.Inputs[Entrada de búsqueda]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Búsqueda Producto.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\Búsqueda Producto.Outputs[Salida de error de búsqueda].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Búsqueda Producto.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\Búsqueda Producto.Outputs[Salida de error de búsqueda].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tarea Flujo de datos\Conversión de datos"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversión de datos;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversión de datos"
+              name="Conversión de datos"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Tarea Flujo de datos\Conversión de datos.Inputs[Entrada de conversión de datos]"
+                  name="Entrada de conversión de datos">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[codigo]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="codigo"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[codigo]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[nombre]"
+                      cachedDataType="wstr"
+                      cachedLength="191"
+                      cachedName="nombre"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[nombre]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[categoria]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="categoria"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[categoria]" />
+                    <inputColumn
+                      refId="Package\Tarea Flujo de datos\Conversión de datos.Inputs[Entrada de conversión de datos].Columns[tipo]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="tipo"
+                      lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[tipo]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de conversión de datos]"
+                  exclusionGroup="1"
+                  name="Salida de conversión de datos"
+                  synchronousInputId="Package\Tarea Flujo de datos\Conversión de datos.Inputs[Entrada de conversión de datos]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de conversión de datos].Columns[codigoConv]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de conversión de datos].Columns[codigoConv]"
+                      name="codigoConv"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[codigo]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de conversión de datos].Columns[nombreConv]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="191"
+                      lineageId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de conversión de datos].Columns[nombreConv]"
+                      name="nombreConv"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[nombre]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de conversión de datos].Columns[categoriaConv]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de conversión de datos].Columns[categoriaConv]"
+                      name="categoriaConv"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[categoria]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de conversión de datos].Columns[tipoConv]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de conversión de datos].Columns[tipoConv]"
+                      name="tipoConv"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica la columna de entrada usada como origen de datos para la conversión."
+                          name="SourceInputColumnLineageID">#{Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[tipo]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica si la columna usa las rutinas de análisis más rápidas independientes de la configuración regional."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de error de conversión de datos]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de conversión de datos"
+                  synchronousInputId="Package\Tarea Flujo de datos\Conversión de datos.Inputs[Entrada de conversión de datos]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de error de conversión de datos].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto"
               componentClassID="Microsoft.ManagedComponentHost"
               contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
               description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
-              name="DimProducto"
+              name="Datos Nuevos DimProducto"
               usesDispositions="true"
               version="2">
               <properties>
@@ -106,7 +665,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Tarea Flujo de datos\DimProducto.Connections[IDbConnection]"
+                  refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Connections[IDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[localhost.DWLGL]"
                   connectionManagerRefId="Package.ConnectionManagers[localhost.DWLGL]"
                   description="Administrador de conexiones administrado"
@@ -114,98 +673,98 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET]"
+                  refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET]"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="Entrada de destino de ADO NET">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].Columns[producto_id]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].Columns[producto_id]"
                       cachedDataType="i4"
                       cachedName="producto_id"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_id]"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_id]"
                       lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[producto_id]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].Columns[codigo]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].Columns[codigo]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="codigo"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[codigo]"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[codigo]"
                       lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[codigo]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].Columns[nombre]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].Columns[nombre]"
                       cachedDataType="wstr"
                       cachedLength="191"
                       cachedName="nombre"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[nombre]"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[nombre]"
                       lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[nombre]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].Columns[categoria]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].Columns[categoria]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="categoria"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[categoria]"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[categoria]"
                       lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[categoria]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].Columns[tipo]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].Columns[tipo]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="tipo"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[tipo]"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[tipo]"
                       lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[tipo]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].Columns[costo]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].Columns[costo]"
                       cachedDataType="numeric"
                       cachedName="costo"
                       cachedPrecision="8"
                       cachedScale="2"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[costo]"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[costo]"
                       lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[costo]" />
                     <inputColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].Columns[producto_activo]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].Columns[producto_activo]"
                       cachedDataType="i4"
                       cachedName="producto_activo"
-                      externalMetadataColumnId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_activo]"
+                      externalMetadataColumnId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_activo]"
                       lineageId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET].Columns[producto_activo]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_key]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_key]"
                       dataType="i4"
                       name="producto_key" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_id]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_id]"
                       dataType="i4"
                       name="producto_id" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[codigo]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[codigo]"
                       dataType="wstr"
                       length="50"
                       name="codigo" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[nombre]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[nombre]"
                       dataType="wstr"
                       length="191"
                       name="nombre" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[categoria]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[categoria]"
                       dataType="wstr"
                       length="50"
                       name="categoria" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[tipo]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[tipo]"
                       dataType="wstr"
                       length="50"
                       name="tipo" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[costo]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[costo]"
                       dataType="numeric"
                       name="costo"
                       precision="8"
                       scale="2" />
                     <externalMetadataColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_activo]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET].ExternalColumns[producto_activo]"
                       dataType="bool"
                       name="producto_activo" />
                   </externalMetadataColumns>
@@ -213,22 +772,22 @@
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Tarea Flujo de datos\DimProducto.Outputs[Salida de error de destino de ADO NET]"
+                  refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Outputs[Salida de error de destino de ADO NET]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Salida de error de destino de ADO NET"
-                  synchronousInputId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET]">
+                  synchronousInputId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\DimProducto.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      lineageId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Tarea Flujo de datos\DimProducto.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      refId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Tarea Flujo de datos\DimProducto.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      lineageId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -482,8 +1041,23 @@ INNER JOIN dbo.tipo_productos t
           </components>
           <paths>
             <path
+              refId="Package\Tarea Flujo de datos.Paths[Salida de conversión de datos]"
+              endId="Package\Tarea Flujo de datos\Actualizar DimProducto.Inputs[Entrada de comando de OLE DB]"
+              name="Salida de conversión de datos"
+              startId="Package\Tarea Flujo de datos\Conversión de datos.Outputs[Salida de conversión de datos]" />
+            <path
+              refId="Package\Tarea Flujo de datos.Paths[Salida de entradas coincidentes de búsqueda]"
+              endId="Package\Tarea Flujo de datos\Conversión de datos.Inputs[Entrada de conversión de datos]"
+              name="Salida de entradas coincidentes de búsqueda"
+              startId="Package\Tarea Flujo de datos\Búsqueda Producto.Outputs[Salida de entradas coincidentes de búsqueda]" />
+            <path
+              refId="Package\Tarea Flujo de datos.Paths[Salida de entradas no coincidentes de búsqueda]"
+              endId="Package\Tarea Flujo de datos\Datos Nuevos DimProducto.Inputs[Entrada de destino de ADO NET]"
+              name="Salida de entradas no coincidentes de búsqueda"
+              startId="Package\Tarea Flujo de datos\Búsqueda Producto.Outputs[Salida de entradas no coincidentes de búsqueda]" />
+            <path
               refId="Package\Tarea Flujo de datos.Paths[Salida de origen de ADO NET]"
-              endId="Package\Tarea Flujo de datos\DimProducto.Inputs[Entrada de destino de ADO NET]"
+              endId="Package\Tarea Flujo de datos\Búsqueda Producto.Inputs[Entrada de búsqueda]"
               name="Salida de origen de ADO NET"
               startId="Package\Tarea Flujo de datos\Leer DimProducto.Outputs[Salida de origen de ADO NET]" />
           </paths>
@@ -502,12 +1076,12 @@ INNER JOIN dbo.tipo_productos t
       DTS:To="Package\Tarea Flujo de datos" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
-<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
-<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
-<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
 <Objects
   Version="8">
-  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
   <Package
     design-time-name="Package">
     <LayoutInfo>
@@ -516,37 +1090,37 @@ INNER JOIN dbo.tipo_productos t
         <NodeLayout
           Size="182,42"
           Id="Package\Limpiar DimProducto"
-          TopLeft="268,78" />
+          TopLeft="267,77" />
         <NodeLayout
           Size="180,42"
           Id="Package\Tarea Flujo de datos"
           TopLeft="424,200" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción]"
-          TopLeft="359,120">
+          TopLeft="358,119">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="155,80"
+              EndConnector="156,81"
               Start="0,0"
-              End="155,72.5">
+              End="156,73.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,36" />
+                    End="0,36.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,36"
-                    Point2="0,40"
-                    Point3="4,40" />
+                    Point1="0,36.5"
+                    Point2="0,40.5"
+                    Point3="4,40.5" />
                   <mssgle:LineSegment
-                    End="151,40" />
+                    End="152,40.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="151,40"
-                    Point2="155,40"
-                    Point3="155,44" />
+                    Point1="152,40.5"
+                    Point2="156,40.5"
+                    Point3="156,44.5" />
                   <mssgle:LineSegment
-                    End="155,72.5" />
+                    End="156,73.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -562,41 +1136,53 @@ INNER JOIN dbo.tipo_productos t
     design-time-name="Package\Tarea Flujo de datos">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="143,42"
-          Id="Package\Tarea Flujo de datos\DimProducto"
-          TopLeft="389,335" />
+          Size="175,42"
+          Id="Package\Tarea Flujo de datos\Búsqueda Producto"
+          TopLeft="341,138" />
+        <NodeLayout
+          Size="215,42"
+          Id="Package\Tarea Flujo de datos\Datos Nuevos DimProducto"
+          TopLeft="291,298" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Tarea Flujo de datos\Conversión de datos"
+          TopLeft="626,215" />
         <NodeLayout
           Size="168,42"
           Id="Package\Tarea Flujo de datos\Leer DimProducto"
-          TopLeft="247,163" />
+          TopLeft="196,70" />
+        <NodeLayout
+          Size="194,42"
+          Id="Package\Tarea Flujo de datos\Actualizar DimProducto"
+          TopLeft="714,321" />
         <EdgeLayout
-          Id="Package\Tarea Flujo de datos.Paths[Salida de origen de ADO NET]"
-          TopLeft="331,205">
+          Id="Package\Tarea Flujo de datos.Paths[Salida de conversión de datos]"
+          TopLeft="716,257">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="129.5,130"
+              EndConnector="95,64"
               Start="0,0"
-              End="129.5,122.5">
+              End="95,56.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,61" />
+                    End="0,28" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,61"
-                    Point2="0,65"
-                    Point3="4,65" />
+                    Point1="0,28"
+                    Point2="0,32"
+                    Point3="4,32" />
                   <mssgle:LineSegment
-                    End="125.5,65" />
+                    End="91,32" />
                   <mssgle:CubicBezierSegment
-                    Point1="125.5,65"
-                    Point2="129.5,65"
-                    Point3="129.5,69" />
+                    Point1="91,32"
+                    Point2="95,32"
+                    Point3="95,36" />
                   <mssgle:LineSegment
-                    End="129.5,122.5" />
+                    End="95,56.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -605,12 +1191,121 @@ INNER JOIN dbo.tipo_productos t
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Tarea Flujo de datos.Paths[Salida de origen de ADO NET]"
+          TopLeft="280,112">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="148.5,26"
+              Start="0,0"
+              End="148.5,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9"
+                    Point2="0,13"
+                    Point3="4,13" />
+                  <mssgle:LineSegment
+                    End="144.5,13" />
+                  <mssgle:CubicBezierSegment
+                    Point1="144.5,13"
+                    Point2="148.5,13"
+                    Point3="148.5,17" />
+                  <mssgle:LineSegment
+                    End="148.5,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Tarea Flujo de datos.Paths[Salida de entradas no coincidentes de búsqueda]"
+          TopLeft="399.583333333333,180">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,118"
+              Start="0,0"
+              End="0,110.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,110.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-106.8890234375,49.15234375,213.778046875,12.1953125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Tarea Flujo de datos.Paths[Salida de entradas coincidentes de búsqueda]"
+          TopLeft="456.333333333333,180">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="259.666666666667,35"
+              Start="0,0"
+              End="259.666666666667,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.1902604756512" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.1902604756512"
+                    Point2="0,14.1902604756512"
+                    Point3="4,14.1902604756512" />
+                  <mssgle:LineSegment
+                    End="255.666666666667,14.1902604756512" />
+                  <mssgle:CubicBezierSegment
+                    Point1="255.666666666667,14.1902604756512"
+                    Point2="259.666666666667,14.1902604756512"
+                    Point3="259.666666666667,18.1902604756512" />
+                  <mssgle:LineSegment
+                    End="259.666666666667,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="30.0143098958333,19.1902604756512,199.638046875,12.1953125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Tarea Flujo de datos\DimProducto">
+    design-time-name="Package\Tarea Flujo de datos\Búsqueda Producto">
     <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimProducto]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
@@ -618,6 +1313,14 @@ INNER JOIN dbo.tipo_productos t
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Tarea Flujo de datos\Leer DimProducto">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tarea Flujo de datos\Datos Nuevos DimProducto">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
